@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.data.jpa.repository.Query;
 
 @Entity
 public class Enterprise {
@@ -14,7 +13,7 @@ public class Enterprise {
     private String email;
     private String password;
     private String name;
-    private String nick_name;
+    private String nickName;
     private String banner;
     private String address;
     private int numberOfEmployees;
@@ -23,12 +22,12 @@ public class Enterprise {
     private Long phone;
     private boolean status;
 
-    public Enterprise(Long id, String email, String password, String name, String nick_name, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
+    public Enterprise(Long id, String email, String password, String name, String nickName, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
-        this.nick_name = nick_name;
+        this.nickName = nickName;
         this.banner = banner;
         this.address = address;
         this.numberOfEmployees = numberOfEmployees;
@@ -74,12 +73,12 @@ public class Enterprise {
         this.name = name;
     }
 
-    public String getNick_name() {
-        return nick_name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNick_name(String nick_name) {
-        this.nick_name = nick_name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getBanner() {
