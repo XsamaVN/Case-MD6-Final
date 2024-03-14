@@ -68,9 +68,7 @@ public class UserController {
                 return new ResponseEntity<>("Email existed",HttpStatus.OK);
             }
         }
-        if (!userService.isCorrectConfirmPassword(user)) {
-            return new ResponseEntity<>("Input confirm password",HttpStatus.OK);
-        }
+
         if (user.getRoles() != null) {
             Role role = roleService.findByName("ROLE_ADMIN");
             Set<Role> roles = new HashSet<>();
@@ -82,6 +80,9 @@ public class UserController {
             roles1.add(role1);
             user.setRoles(roles1);
         }
+        String password = emailService.generateRandomPassword();
+        user.setPassword(password) ;
+        user.setConfirmPassword(password);
         emailService.sendEmail(user.getEmail(),user.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
