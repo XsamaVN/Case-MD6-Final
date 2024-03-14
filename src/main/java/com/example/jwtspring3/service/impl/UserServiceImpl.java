@@ -21,10 +21,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) {
+        User user = userRepository.findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
         if (this.checkLogin(user)) {
             return UserPrinciple.build(user);
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         boolean accountNonExpired = false;
         boolean credentialsNonExpired = false;
         boolean accountNonLocked = false;
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(), enable, accountNonExpired, credentialsNonExpired,
                 accountNonLocked, null);
     }
@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByEmail(String username) {
+        return userRepository.findByEmail(username);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         } else {
             userName = principal.toString();
         }
-        user = this.findByUsername(userName);
+        user = this.findByEmail(userName);
         return user;
     }
 
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
         Iterable<User> users = this.findAll();
         boolean isCorrectUser = false;
         for (User currentUser : users) {
-            if (currentUser.getUsername().equals(user.getUsername()) && user.getPassword().equals(currentUser.getPassword()) && currentUser.isEnabled()) {
+            if (currentUser.getEmail().equals(user.getEmail()) && user.getPassword().equals(currentUser.getPassword()) && currentUser.isEnabled()) {
                 isCorrectUser = true;
                 break;
             }
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
         boolean isRegister = false;
         Iterable<User> users = this.findAll();
         for (User currentUser : users) {
-            if (user.getUsername().equals(currentUser.getUsername())) {
+            if (user.getEmail().equals(currentUser.getEmail())) {
                 isRegister = true;
                 break;
             }

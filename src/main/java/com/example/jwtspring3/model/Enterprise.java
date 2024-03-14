@@ -11,8 +11,6 @@ public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
-    private String password;
     private String name;
     private String nick_name;
     private String banner;
@@ -23,10 +21,8 @@ public class Enterprise {
     private Long phone;
     private boolean status;
 
-    public Enterprise(Long id, String email, String password, String name, String nick_name, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
+    public Enterprise(Long id, String name, String nick_name, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
         this.id = id;
-        this.email = email;
-        this.password = password;
         this.name = name;
         this.nick_name = nick_name;
         this.banner = banner;
@@ -48,22 +44,6 @@ public class Enterprise {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {

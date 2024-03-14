@@ -60,7 +60,7 @@ public class UserController {
         }
         Iterable<User> users = userService.findAll();
         for (User currentUser : users) {
-            if (currentUser.getUsername().equals(user.getUsername())) {
+            if (currentUser.getEmail().equals(user.getEmail())) {
                 return new ResponseEntity<>("Username existed",HttpStatus.OK);
             }
         }
@@ -86,11 +86,11 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtService.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userService.findByUsername(user.getUsername());
+        User currentUser = userService.findByEmail(user.getEmail());
         return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
@@ -112,7 +112,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         user.setId(userOptional.get().getId());
-        user.setUsername(userOptional.get().getUsername());
+        user.setEmail(userOptional.get().getEmail());
         user.setEnabled(userOptional.get().isEnabled());
         user.setPassword(userOptional.get().getPassword());
         user.setRoles(userOptional.get().getRoles());

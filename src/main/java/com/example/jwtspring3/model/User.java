@@ -3,7 +3,6 @@ package com.example.jwtspring3.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -14,12 +13,10 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true, nullable = false)
-    private String username;
+    private String email;
     @Column(nullable = false)
     private String password;
-
     @Column(nullable = false)
     private String confirmPassword;
     private boolean enabled = true;
@@ -29,16 +26,16 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
-    public User(String username, String password, String confirmPassword, Set<Role> roles) {
-        this.username = username;
+    public User(String email, String password, String confirmPassword, Set<Role> roles) {
+        this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.roles = roles;
     }
 
-    public User(Long id, String username, String password, String confirmPassword, boolean enabled, Set<Role> roles) {
+    public User(Long id, String email, String password, String confirmPassword, boolean enabled, Set<Role> roles) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.enabled = enabled;
@@ -56,12 +53,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
