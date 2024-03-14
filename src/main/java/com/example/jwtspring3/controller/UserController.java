@@ -6,6 +6,7 @@ import com.example.jwtspring3.model.User;
 import com.example.jwtspring3.service.RoleService;
 import com.example.jwtspring3.service.UserService;
 import com.example.jwtspring3.service.impl.JwtService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,14 +55,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity createUser(@RequestBody User user, BindingResult bindingResult) {
+    public ResponseEntity createUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(bindingResult.getFieldError().getDefaultMessage().toString(),HttpStatus.BAD_REQUEST);
         }
         Iterable<User> users = userService.findAll();
         for (User currentUser : users) {
             if (currentUser.getEmail().equals(user.getEmail())) {
-                return new ResponseEntity<>("Username existed",HttpStatus.OK);
+                return new ResponseEntity<>("Email existed",HttpStatus.OK);
             }
         }
         if (!userService.isCorrectConfirmPassword(user)) {
