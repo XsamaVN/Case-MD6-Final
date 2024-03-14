@@ -5,6 +5,7 @@ import com.example.jwtspring3.model.Role;
 import com.example.jwtspring3.model.User;
 import com.example.jwtspring3.service.RoleService;
 import com.example.jwtspring3.service.UserService;
+import com.example.jwtspring3.service.impl.EmailService;
 import com.example.jwtspring3.service.impl.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private EmailService emailService;
 
 
     @GetMapping("/users")
@@ -79,9 +82,11 @@ public class UserController {
             roles1.add(role1);
             user.setRoles(roles1);
         }
+        emailService.sendEmail(user.getEmail(),user.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
         userService.save(user);
+
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
