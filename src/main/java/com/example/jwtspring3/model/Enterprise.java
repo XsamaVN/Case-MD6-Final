@@ -12,7 +12,7 @@ public class Enterprise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String nick_name;
+    private String nickName;
     private String banner;
     private String address;
     private int numberOfEmployees;
@@ -21,10 +21,10 @@ public class Enterprise {
     private Long phone;
     private boolean status;
 
-    public Enterprise(Long id, String name, String nick_name, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
+    public Enterprise(Long id, String name, String nickName, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
         this.id = id;
         this.name = name;
-        this.nick_name = nick_name;
+        this.nickName = nickName;
         this.banner = banner;
         this.address = address;
         this.numberOfEmployees = numberOfEmployees;
@@ -54,12 +54,12 @@ public class Enterprise {
         this.name = name;
     }
 
-    public String getNick_name() {
-        return nick_name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNick_name(String nick_name) {
-        this.nick_name = nick_name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getBanner() {
