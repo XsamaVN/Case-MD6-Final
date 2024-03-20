@@ -39,4 +39,5 @@ public class EnterpriseController {
         enterprise.setStatus(false);
         return new ResponseEntity<>(enterpriseService.save(enterprise), HttpStatus.OK);
     }
+
 }

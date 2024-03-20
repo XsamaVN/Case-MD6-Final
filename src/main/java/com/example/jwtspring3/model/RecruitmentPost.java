@@ -1,12 +1,9 @@
 package com.example.jwtspring3.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class RecruitmentPost {
@@ -15,12 +12,12 @@ public class RecruitmentPost {
 
     private Long id;
     private String title;
-    private int salary;
+    private Long salary;
     private String position;
     private String exp;
     private String workingForm;
     private LocalDate expiryDate;
-    private String discription;
+    private String description;
     private String recruitmentQuota;
     private String sex;
     private String status;
@@ -28,7 +25,7 @@ public class RecruitmentPost {
     @ManyToOne
     private Enterprise enterprise;
 
-    public RecruitmentPost(Long id, String title, int salary, String position, String exp, String workingForm, LocalDate expiryDate, String discription, String recruitmentQuota, String sex, String status, Enterprise enterprise) {
+    public RecruitmentPost(Long id, String title, Long salary, String position, String exp, String workingForm, LocalDate expiryDate, String description, String recruitmentQuota, String sex, String status, Enterprise enterprise) {
         this.id = id;
         this.title = title;
         this.salary = salary;
@@ -36,7 +33,7 @@ public class RecruitmentPost {
         this.exp = exp;
         this.workingForm = workingForm;
         this.expiryDate = expiryDate;
-        this.discription = discription;
+        this.description = description;
         this.recruitmentQuota = recruitmentQuota;
         this.sex = sex;
         this.status = status;
@@ -62,11 +59,11 @@ public class RecruitmentPost {
         this.title = title;
     }
 
-    public int getSalary() {
+    public Long getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(Long salary) {
         this.salary = salary;
     }
 
@@ -102,12 +99,12 @@ public class RecruitmentPost {
         this.expiryDate = expiryDate;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getRecruitmentQuota() {
