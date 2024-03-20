@@ -57,28 +57,23 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity createUser(@Valid @RequestBody User user, BindingResult bindingResult) {
+    @PostMapping("/register/{id}")
+    public ResponseEntity createUser(@RequestBody User user, BindingResult bindingResult , @PathVariable Long id) {
         if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(bindingResult.getFieldError().getDefaultMessage().toString(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Iterable<User> users = userService.findAll();
         for (User currentUser : users) {
             if (currentUser.getEmail().equals(user.getEmail())) {
-                return new ResponseEntity<>("Email existed",HttpStatus.OK);
+                return new ResponseEntity<>("Username existed",HttpStatus.BAD_REQUEST);
             }
         }
 
-        if (user.getRoles() != null) {
-            Role role = roleService.findByName("ROLE_ADMIN");
+        if (user.getRoles() == null ){
+            Role role = roleService.findById(id);
             Set<Role> roles = new HashSet<>();
             roles.add(role);
             user.setRoles(roles);
-        } else {
-            Role role1 = roleService.findByName("ROLE_USER");
-            Set<Role> roles1 = new HashSet<>();
-            roles1.add(role1);
-            user.setRoles(roles1);
         }
         String password = emailService.generateRandomPassword();
         user.setPassword(password) ;

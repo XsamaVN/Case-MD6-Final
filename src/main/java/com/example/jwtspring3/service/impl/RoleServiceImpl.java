@@ -22,8 +22,8 @@ roleRepository.save(role);
     }
 
     @Override
-    public Role findByName(String name) {
-        return roleRepository.findByName(name);
+    public Role findById(Long id) {
+        return roleRepository.findRoleById(id);
     }
 
 
