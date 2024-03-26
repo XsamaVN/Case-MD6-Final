@@ -115,6 +115,7 @@ public class UserController {
         }
         user.setId(userOptional.get().getId());
         user.setEmail(userOptional.get().getEmail());
+        user.setAvatar(userOptional.get().getAvatar());
         user.setEnabled(userOptional.get().isEnabled());
         user.setPassword(userOptional.get().getPassword());
         user.setRoles(userOptional.get().getRoles());
