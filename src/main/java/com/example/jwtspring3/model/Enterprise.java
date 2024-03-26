@@ -1,9 +1,6 @@
 package com.example.jwtspring3.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.data.jpa.repository.Query;
 
 @Entity
@@ -13,6 +10,7 @@ public class Enterprise {
     private Long id;
     private String name;
     private String nickName;
+    @Column(length = 1000)
     private String banner;
     private String address;
     private int numberOfEmployees;
