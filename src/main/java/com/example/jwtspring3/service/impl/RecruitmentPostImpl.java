@@ -37,12 +37,12 @@ public class RecruitmentPostImpl implements RecruitmentPostService {
 
     @Override
     public RecruitmentPost save(RecruitmentPost recruitmentPost) {
-        return null;
+        return recruitmentPostRepository.save(recruitmentPost);
     }
 
     @Override
     public Optional<RecruitmentPost> findById(Long id) {
-        return Optional.empty();
+        return recruitmentPostRepository.findById(id);
     }
 
     @Override

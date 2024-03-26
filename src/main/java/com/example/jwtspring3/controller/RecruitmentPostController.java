@@ -12,42 +12,37 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/recruitmentPosts")
+@RequestMapping("/api/recruitment-posts")
 public class RecruitmentPostController {
-    @Autowired
-    RecruitmentPostRepository recruitmentPostRepository;
+
     @Autowired
     RecruitmentPostService recruitmentPostService;
 
     @GetMapping()
-    public ResponseEntity<?> findAll(String position, String address, Long idEnterprise) {
+    public ResponseEntity findAll(String position, String address, Long idEnterprise) {
         return new ResponseEntity<>(recruitmentPostService.findAll(position, address, idEnterprise), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(recruitmentPostRepository.findById(id), HttpStatus.OK);
+    public ResponseEntity findById(@PathVariable Long id) {
+        return new ResponseEntity<>(recruitmentPostService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> saveAdd(@RequestBody RecruitmentPost recruitmentPost) {
-        return new ResponseEntity<>(recruitmentPostRepository.save(recruitmentPost), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        recruitmentPostRepository.deleteById(id);
-        return new ResponseEntity<>("??", HttpStatus.OK);
+    public ResponseEntity add(@RequestBody RecruitmentPost recruitmentPost) {
+        recruitmentPost.setStatus(true);
+        return new ResponseEntity<>(recruitmentPostService.save(recruitmentPost), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editStudent(@PathVariable Long id, @RequestBody RecruitmentPost recruitmentPost) {
+    public ResponseEntity edit(@PathVariable Long id, @RequestBody RecruitmentPost recruitmentPost) {
         recruitmentPost.setId(id);
-        return new ResponseEntity<>(recruitmentPostRepository.save(recruitmentPost), HttpStatus.OK);
+        return new ResponseEntity<>(recruitmentPostService.save(recruitmentPost), HttpStatus.OK);
     }
-    @GetMapping("/search/{position}/{address}")
-    public ResponseEntity<List<RecruitmentPost>> searchPositionAndAddress(@PathVariable String position, @PathVariable String address) {
-        List<RecruitmentPost> recruitmentPosts = recruitmentPostRepository.findByPositionContainingAndEnterprise_AddressContaining(position, address);
-        return new ResponseEntity<>(recruitmentPosts, HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id, @RequestBody RecruitmentPost recruitmentPost) {
+        recruitmentPost.setId(id);
+        recruitmentPost.setStatus(false);
+        return new ResponseEntity<>(recruitmentPostService.save(recruitmentPost), HttpStatus.OK);
     }
 }
