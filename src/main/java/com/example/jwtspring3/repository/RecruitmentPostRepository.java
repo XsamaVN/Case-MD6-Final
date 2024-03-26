@@ -12,4 +12,6 @@ public interface RecruitmentPostRepository extends JpaRepository<RecruitmentPost
     List<RecruitmentPost> findByPositionContainingAndEnterprise_AddressContaining(String position, String address);
     List<RecruitmentPost> findAllByPositionContaining (String position);
     List<RecruitmentPost> findByEnterprise_AddressContaining(String address);
+    List<RecruitmentPost> findAllByEnterprise_Id(Long idEnterprise);
+    List<RecruitmentPost> findRecruitmentPostsByStatus(boolean status);
 }

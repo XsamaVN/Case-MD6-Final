@@ -20,24 +20,18 @@ public class RecruitmentPost {
     private String description;
     private String recruitmentQuota;
     private String sex;
-    private String status;
+    private Boolean status;
 
     @ManyToOne
     private Enterprise enterprise;
 
-    public RecruitmentPost(Long id, String title, Long salary, String position, String exp, String workingForm, LocalDate expiryDate, String description, String recruitmentQuota, String sex, String status, Enterprise enterprise) {
-        this.id = id;
-        this.title = title;
-        this.salary = salary;
-        this.position = position;
-        this.exp = exp;
-        this.workingForm = workingForm;
-        this.expiryDate = expiryDate;
-        this.description = description;
-        this.recruitmentQuota = recruitmentQuota;
-        this.sex = sex;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
         this.status = status;
-        this.enterprise = enterprise;
     }
 
     public RecruitmentPost() {
@@ -123,13 +117,6 @@ public class RecruitmentPost {
         this.sex = sex;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public Enterprise getEnterprise() {
         return enterprise;

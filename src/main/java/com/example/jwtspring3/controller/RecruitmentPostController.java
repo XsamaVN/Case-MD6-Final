@@ -20,8 +20,8 @@ public class RecruitmentPostController {
     RecruitmentPostService recruitmentPostService;
 
     @GetMapping()
-    public ResponseEntity<?> findAll(String position, String address) {
-        return new ResponseEntity<>(recruitmentPostService.findAll(position, address), HttpStatus.OK);
+    public ResponseEntity<?> findAll(String position, String address, Long idEnterprise) {
+        return new ResponseEntity<>(recruitmentPostService.findAll(position, address, idEnterprise), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
