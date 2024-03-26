@@ -22,6 +22,8 @@ public class User implements Serializable {
     private String password;
     @Column(nullable = false)
     private String confirmPassword;
+    @Column(length = 1000)
+    private String avatar;
     private boolean enabled = true;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
@@ -36,13 +38,12 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public User(Long id, String email, String password, String confirmPassword, boolean enabled, Set<Role> roles) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.enabled = enabled;
-        this.roles = roles;
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public User() {
