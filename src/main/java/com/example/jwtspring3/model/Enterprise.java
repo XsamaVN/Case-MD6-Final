@@ -18,22 +18,21 @@ public class Enterprise {
     private String map;
     private Long phone;
     private boolean status;
+    @OneToOne
+    private User user;
 
-    public Enterprise(Long id, String name, String nickName, String banner, String address, int numberOfEmployees, String branch, String map, Long phone, boolean status) {
-        this.id = id;
-        this.name = name;
-        this.nickName = nickName;
-        this.banner = banner;
-        this.address = address;
-        this.numberOfEmployees = numberOfEmployees;
-        this.branch = branch;
-        this.map = map;
-        this.phone = phone;
-        this.status = status;
-    }
+
 
     public Enterprise() {
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
